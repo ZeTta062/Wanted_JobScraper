@@ -18,6 +18,7 @@ def scrape_jobs(keyword):
 
     content = page.content()  # beautifulsoup에 제공할 내용
 
+    
     p.stop()
 
     # BeautifulSoup을 사용하여 페이지에서 원하는 정보 추출

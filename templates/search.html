@@ -10,39 +10,46 @@
     <main class="container">
         <h1>JobScraper</h1>
         <h3>{{keyword}}에 대한 검색결과입니다. ({{ job_count }})</h3>
-        <a 
-        href="/export?keyword={{keyword}}"
-        target="_blank"
-        >
-        <!-- target = 새로운 탭으로 열림 -->
-            <button>CSV 파일로 저장</button>
-        </a>
-        <figure>
-            <table role="grid">
-                <thead>
-                    <tr>
-                        <th>제목</th>
-                        <th>회사</th>
-                        <th>보상금</th>
-                        <th>링크</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for job in jobs %}
+        {% if job_count > 0 %}
+            <a 
+            href="/export?keyword={{keyword}}"
+            target="_blank"
+            >
+            <!-- target = 새로운 탭으로 열림 -->
+                <button>CSV 파일로 저장</button>
+            </a>
+            <figure>
+                <table role="grid">
+                    <thead>
                         <tr>
-                            <td>{{ job.title }}</td>
-                            <td>{{ job.company }}</td>
-                            <td>{{ job.reward }}</td>
-                            <td>
-                                <a href="{{ job.link }}" target="_blank">바로가기 &rarr;</a>
-                            </td>
+                            <th>제목</th>
+                            <th>회사</th>
+                            <th>보상금</th>
+                            <th>링크</th>
                         </tr>
-                    {% endfor %}
-                </tbody>
-            </table>  
-        </figure>     
+                    </thead>
+                    <tbody>
+                        {% for job in jobs %}
+                            <tr>
+                                <td>{{ job.title }}</td>
+                                <td>{{ job.company }}</td>
+                                <td>{{ job.reward }}</td>
+                                <td>
+                                    <a href="{{ job.link }}" target="_blank">바로가기 &rarr;</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>  
+            </figure>
+        {% else %}
+            <p class="no-results">😢 검색 결과가 없습니다. 다른 검색어를 시도해보세요.</p>
+        {% endif %}
+        
         <br>
-        <a href="/">홈으로 돌아가기</a>
+        <a href="/">
+            <button>🏠 홈으로 돌아가기</button>
+        </a>
     </main>
 </body>
 </html>
